@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import {
   FormControl,
   FormsModule,
@@ -7,15 +7,23 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Subscription, interval } from 'rxjs';
+import { TimerPipe } from './timer-pipe';
 
 @Component({
   selector: 'app-form-component',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+    FormsModule,
+    TimerPipe,
+  ],
   templateUrl: './form-component.component.html',
   styleUrl: './form-component.component.css',
 })
-export class FormComponentComponent {
+export class FormComponentComponent implements OnInit {
   firstname: FormControl = new FormControl(null, [
     Validators.minLength(2),
     Validators.maxLength(30),
@@ -38,4 +46,24 @@ export class FormComponentComponent {
     Validators.max(130),
     Validators.required,
   ]);
+
+  timer: number = 0;
+  private timerSubscription: Subscription | undefined;
+
+  ngOnInit(): void {
+    this.startTimer();
+  }
+
+  ngOnDestroy(): void {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+  }
+
+  private startTimer(): void {
+    this.timerSubscription = interval(10).subscribe(() => {
+      // increments every 5 millisecs
+      this.timer += 5;
+    });
+  }
 }

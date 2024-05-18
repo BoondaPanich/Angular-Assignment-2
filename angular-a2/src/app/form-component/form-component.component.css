@@ -7,9 +7,11 @@ h2 {
 }
 
 p {
-  font-family: cursive;
   text-align: center;
-  color: rgb(192, 130, 38);
+  padding: 10px;
+  font-family: cursive;
+  color: rgb(126, 84, 37);
+  background-color: rgb(255, 251, 246);
 }
 
 input {
