@@ -1,0 +1,26 @@
+<div>
+  <p id="directive">Structural Directive :</p>
+  <h2>Select any animal you'd like</h2>
+  <button
+    id="option"
+    *ngFor="let animal of animals"
+    (click)="selectedAnimal = animal"
+  >
+    {{ animal }}
+  </button>
+</div>
+
+<div>
+  <p>Attribute Directive :</p>
+  <h2>What color would you like your animal to be ?</h2>
+  <input [(ngModel)]="animalColor" placeholder="Enter any color" />
+</div>
+
+<!-- let-animalArt = create a variable named animalArt that holds the value passed from the appShowAnimal directive -->
+<ng-template [appShowAnimal]="selectedAnimal" let-animalArt>
+  <!-- ----------- Custom Attribute Directive ----------- -->
+  <pre [appChangeColor]="animalColor">
+    {{ animalArt }}
+</pre
+  >
+</ng-template>

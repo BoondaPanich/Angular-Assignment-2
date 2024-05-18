@@ -1,0 +1,20 @@
+<h1>Please Login</h1>
+<div>
+  <input
+    id="email-box"
+    type="text"
+    [formControl]="email"
+    placeholder="Enter your email"
+  />
+  <br />
+  <input
+    id="password-box"
+    type="text"
+    [formControl]="password"
+    placeholder="Enter your password"
+  />
+  <br />
+  <button [routerLink]="['/form']" [disabled]="!email.valid || !password.valid">
+    Submit
+  </button>
+</div>
